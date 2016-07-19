@@ -1,0 +1,70 @@
+doctype html
+html
+	head
+		title #{title}
+
+		meta(name="viewport", content="width=480, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no")
+
+		link(rel='stylesheet', href='bower_components/bootstrap/dist/css/bootstrap.min.css')
+		link(rel='stylesheet', href='css/style.css')
+		script(type='text/javascript', src='bower_components/angular/angular.min.js')
+
+	body(oncontextmenu='return false', ng-app='checkoutApp', ng-controller='mainCtrl')
+		div.pagecontainer(oncontextmenu='return false')
+
+			section(ng-hide="admin")
+				header
+					button.button(ng-click="admin = true") Admin
+				div.col-xs-3
+					div.list-group()
+						a.list-group-item(href='#', ng-class="activeUser.name == person.name ? 'activeListItem' : ''", ng-click='updateActiveUserAndGetOwnerships(person)', ng-repeat='person in peopleList', ng-init="initPeople()") {{person.name}}
+				div.col-xs-3
+					p Take:
+					div.buttonGroup(role='group')
+						button.quantityButton(ng-click='changeQuantity(-1)') -1
+						button.quantityButton(ng-click='changeQuantity(-5)') -5
+						button.quantityButton(ng-click='changeQuantity(-10)') -10
+				div.col-xs-3.inputs
+					label Total {{activeProduct.name}}s:
+					input.form-control(type="number" disabled ng-model='activeProduct.quantity')
+					label {{activeUser.name}}:
+					input.form-control(type="number" disabled ng-model='personalQuantity', ng-init='goThroughOwnerships()')
+				div.col-xs-3
+					p Return:
+					div.buttonGroup(role='group')
+						button.quantityButton(ng-click='changeQuantity(1)') +1
+						button.quantityButton(ng-click='changeQuantity(5)') +5
+						button.quantityButton(ng-click='changeQuantity(10)') +10
+
+				div.col-xs-12
+					ul.productList
+						li.productItem(ng-repeat="product in productList", ng-init="initProducts()")
+							button.productButton(ng-class="activeProduct.name == product.name ? 'activeProduct' : ''", ng-click="updateActiveProductAndGetOwnerships(product)") {{product.name}}
+
+			section(ng-show="admin")
+				header
+					button.button(ng-click="admin = false") View
+
+				div.col-xs-4
+					label Create new person:
+					input.form-control#adminCreatePerson(type="text" placeholder="Name" ng-model="newPerson.name")
+					button.button(ng-click="createPerson()") Create {{newPerson.name}}
+					br
+
+					label Create new product:
+					input.form-control(type="text" placeholder="Name" ng-model="newProduct.name")
+					input.form-control(type="number" placeholder="Quantity" ng-model="newProduct.quantity")
+					button.button(ng-click="createProduct()") Create {{newProduct.name}}
+				div.col-xs-4
+					select
+						option something
+						option another
+						option wow things
+						option so many
+						option such choice
+						option dopeness
+				div.col-xs-4
+
+		script(type="text/javascript", src="bower_components/angular-resource/angular-resource.min.js")
+		script(type="text/javascript", src="js/lb-services.js")
+		script(type="text/javascript", src="js/app.js")

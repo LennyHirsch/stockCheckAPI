@@ -1,0 +1,33 @@
+{
+  "name": "Product",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "sku": {
+      "type": "string",
+      "required": true
+    },
+    "quantity": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "ownerships": {
+      "type": "hasOne",
+      "model": "Ownership",
+      "foreignKey": ""
+    }
+  },
+  "acls": [
+  ],
+  "methods": {}
+}

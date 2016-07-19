@@ -1,0 +1,31 @@
+doctype html
+html
+	head
+		title get/create users
+
+		meta(name="viewport", content="width=480, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no")
+
+		link(rel='stylesheet', href='/bootstrap/dist/css/bootstrap.min.css')
+		link(rel='stylesheet', href='/css/css.css')
+
+		script(type='text/javascript', src='js/angular.js')
+
+	body(oncontextmenu='return false', ng-app='checkoutApp', ng-controller='mainCtrl')
+		section
+			div.col-md-1
+			div.col-md-4
+				div.list-group
+					a.list-group-item(href="#", ng-repeat="person in peopleList") {{person.name}}
+			div.col-md-3
+				label SDs:
+				input.input(type="number" ng-model="productList[0].quantity")
+				button.button(ng-click="changeQuantity(-10)") -10
+			div.col-md-3
+				label Name:
+				input.input(type="text", ng-model="newperson.name")
+				button.button(ng-click="createPerson()") Create {{newperson.name}}
+			div.col-md-1
+			
+		script(type="text/javascript", src="bower/angular-resource/angular-resource.min.js")
+		script(type="text/javascript", src="js/lb-services.js")
+		script(type="text/javascript", src="js/app.js")
